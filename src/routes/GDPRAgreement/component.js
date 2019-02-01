@@ -25,14 +25,17 @@ export default class GDPR extends Component {
 			className={createClassName(styles, 'gdpr')}
 			{...props}
 		>
-			<p className={createClassName(styles, 'gdpr__consent-text')}>{consentText}</p>
-			<p className={createClassName(styles, 'gdpr__instructions')} translate="no">
-				Go to <strong>menu options → Forget/Remove my personal data</strong> to request the immediate removal of your data.
-			</p>
+			<Screen.Content>
+				<p className={createClassName(styles, 'gdpr__consent-text')}>{consentText}</p>
+				<p className={createClassName(styles, 'gdpr__instructions')} translate="no">
+					Go to <strong>menu options → Forget/Remove my personal data</strong> to request the immediate removal of your data.
+				</p>
 
-			<Button.Group>
-				<Button onClick={this.handleClick} stack>I Agree</Button>
-			</Button.Group>
+				<Button.Group>
+					<Button onClick={this.handleClick} stack>I Agree</Button>
+				</Button.Group>
+			</Screen.Content>
+			<Screen.Footer />
 		</Screen>
 	)
 }

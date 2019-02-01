@@ -118,68 +118,71 @@ export default class Register extends Component {
 				className={createClassName(styles, 'register')}
 				{...props}
 			>
-				<p className={createClassName(styles, 'register__message')}>{message}</p>
+				<Screen.Content>
+					<p className={createClassName(styles, 'register__message')}>{message}</p>
 
-				<Form onSubmit={this.handleSubmit}>
-					{name && (
+					<Form onSubmit={this.handleSubmit}>
+						{name && (
+							<Form.Item>
+								<Form.Label error={name.showError} htmlFor="name">Name *</Form.Label>
+								<Form.TextInput
+									id="name"
+									name="name"
+									placeholder="Insert your name here..."
+									disabled={loading}
+									value={name.value}
+									error={name.showError}
+									onInput={this.handleNameChange}
+								/>
+								<Form.Description error={name.showError}>
+									{name.showError && name.error}
+								</Form.Description>
+							</Form.Item>
+						)}
+
+						{email && (
+							<Form.Item>
+								<Form.Label error={email.showError} htmlFor="email">Email *</Form.Label>
+								<Form.TextInput
+									id="email"
+									name="email"
+									placeholder="Insert your email here..."
+									disabled={loading}
+									value={email.value}
+									error={email.showError}
+									onInput={this.handleEmailChange}
+								/>
+								<Form.Description error={email.showError}>
+									{email.showError && email.error}
+								</Form.Description>
+							</Form.Item>
+						)}
+
+						{department && (
+							<Form.Item>
+								<Form.Label error={department.showError} htmlFor="department">I need help with...</Form.Label>
+								<Form.SelectInput
+									id="department"
+									name="department"
+									placeholder="Choose an option..."
+									options={departments.map(({ _id, name }) => ({ value: _id, label: name }))}
+									disabled={loading}
+									value={department.value}
+									error={department.showError}
+									onInput={this.handleDepartmentChange}
+								/>
+								<Form.Description error={department.showError}>
+									{department.showError && department.error}
+								</Form.Description>
+							</Form.Item>
+						)}
+
 						<Form.Item>
-							<Form.Label error={name.showError} htmlFor="name">Name *</Form.Label>
-							<Form.TextInput
-								id="name"
-								name="name"
-								placeholder="Insert your name here..."
-								disabled={loading}
-								value={name.value}
-								error={name.showError}
-								onInput={this.handleNameChange}
-							/>
-							<Form.Description error={name.showError}>
-								{name.showError && name.error}
-							</Form.Description>
+							<Button loading={loading} disabled={!valid || loading} stack>Start Chat</Button>
 						</Form.Item>
-					)}
-
-					{email && (
-						<Form.Item>
-							<Form.Label error={email.showError} htmlFor="email">Email *</Form.Label>
-							<Form.TextInput
-								id="email"
-								name="email"
-								placeholder="Insert your email here..."
-								disabled={loading}
-								value={email.value}
-								error={email.showError}
-								onInput={this.handleEmailChange}
-							/>
-							<Form.Description error={email.showError}>
-								{email.showError && email.error}
-							</Form.Description>
-						</Form.Item>
-					)}
-
-					{department && (
-						<Form.Item>
-							<Form.Label error={department.showError} htmlFor="department">I need help with...</Form.Label>
-							<Form.SelectInput
-								id="department"
-								name="department"
-								placeholder="Choose an option..."
-								options={departments.map(({ _id, name }) => ({ value: _id, label: name }))}
-								disabled={loading}
-								value={department.value}
-								error={department.showError}
-								onInput={this.handleDepartmentChange}
-							/>
-							<Form.Description error={department.showError}>
-								{department.showError && department.error}
-							</Form.Description>
-						</Form.Item>
-					)}
-
-					<Form.Item>
-						<Button loading={loading} disabled={!valid || loading} stack>Start Chat</Button>
-					</Form.Item>
-				</Form>
+					</Form>
+				</Screen.Content>
+				<Screen.Footer />
 			</Screen>
 		);
 	}

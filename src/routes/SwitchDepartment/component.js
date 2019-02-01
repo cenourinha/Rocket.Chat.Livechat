@@ -80,31 +80,34 @@ export default class SwitchDepartment extends Component {
 				className={createClassName(styles, 'switch-department')}
 				{...props}
 			>
-				<p className={createClassName(styles, 'switch-department__message')}>{message}</p>
+				<Screen.Content>
+					<p className={createClassName(styles, 'switch-department__message')}>{message}</p>
 
-				<Form onSubmit={this.handleSubmit}>
-					<Form.Item>
-						<Form.Label error={department && department.showError} htmlFor="department">Departments</Form.Label>
-						<Form.SelectInput
-							id="department"
-							name="department"
-							placeholder="Choose a department..."
-							options={departments.map(({ _id, name }) => ({ value: _id, label: name }))}
-							disabled={loading}
-							value={department && department.value}
-							error={department && department.showError}
-							onInput={this.handleDepartmentChange}
-						/>
-						<Form.Description error={department && department.showError}>
-							{department && department.showError && department.error}
-						</Form.Description>
-					</Form.Item>
+					<Form onSubmit={this.handleSubmit}>
+						<Form.Item>
+							<Form.Label error={department && department.showError} htmlFor="department">Departments</Form.Label>
+							<Form.SelectInput
+								id="department"
+								name="department"
+								placeholder="Choose a department..."
+								options={departments.map(({ _id, name }) => ({ value: _id, label: name }))}
+								disabled={loading}
+								value={department && department.value}
+								error={department && department.showError}
+								onInput={this.handleDepartmentChange}
+							/>
+							<Form.Description error={department && department.showError}>
+								{department && department.showError && department.error}
+							</Form.Description>
+						</Form.Item>
 
-					<Form.Item>
-						<Button loading={loading} disabled={!valid || loading} stack>Start chat</Button>
-						<Button disabled={loading} stack secondary nude onClick={this.handleCancelClick}>Cancel</Button>
-					</Form.Item>
-				</Form>
+						<Form.Item>
+							<Button loading={loading} disabled={!valid || loading} stack>Start chat</Button>
+							<Button disabled={loading} stack secondary nude onClick={this.handleCancelClick}>Cancel</Button>
+						</Form.Item>
+					</Form>
+				</Screen.Content>
+				<Screen.Footer />
 			</Screen>
 		);
 	}
